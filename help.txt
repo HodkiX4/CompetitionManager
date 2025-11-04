@@ -1,0 +1,3 @@
+// Oldalak
+Auth -> Login, Register
+Protected -> Competitions, Create Competitions, Edit Competitions

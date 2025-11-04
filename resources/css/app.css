@@ -1,11 +1,221 @@
-@import 'tailwindcss';
+:root {
+  --color-primary-hue: 0; /* bordó */
+  --color-secondary-hue: 215; /* sötétkék */
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+  --color-primary: hsl(var(--color-primary-hue), 75%, 55%);
+  --color-primary-light: hsl(var(--color-primary-hue), 80%, 65%);
+  --color-primary-dark: hsl(var(--color-primary-hue), 70%, 45%);
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+  --color-secondary: hsl(var(--color-secondary-hue), 75%, 35%);
+  --color-secondary-light: hsl(var(--color-secondary-hue), 80%, 45%);
+  --color-secondary-dark: hsl(var(--color-secondary-hue), 70%, 25%);
+
+  --gray-100: hsl(0, 15%, 98%);
+  --gray-200: hsl(0, 15%, 90%);
+  --gray-300: hsl(0, 12%, 80%);
+  --gray-400: hsl(0, 10%, 65%);
+  --gray-500: hsl(0, 10%, 50%);
+  --gray-600: hsl(0, 10%, 35%);
+  --gray-700: hsl(0, 12%, 25%);
+  --gray-800: hsl(0, 15%, 15%);
+  --gray-900: hsl(0, 20%, 8%);
+
+  --bg-color: var(--gray-100);
+  --text-color: var(--gray-900);
+  --link-color: var(--gray-500);
+  --btn-color: var(--gray-100);
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  --space-1: 0.25em;
+  --space-2: 0.5em;
+  --space-3: 1em;
+  --space-4: 1.5em;
+  --space-5: 2em;
+  --space-6: 3em;
+
+  --shadow-color: hsla(var(--color-primary-hue), 40%, 20%, 0.25);
+  --shadow-sm: 0 1px 2px var(--shadow-color);
+  --shadow-md: 0 2px 6px var(--shadow-color);
+  --shadow-lg: 0 4px 12px var(--shadow-color);
+  --shadow-xl: 0 8px 24px var(--shadow-color);
+
+  --transition-fast: 150ms ease;
+  --transition-medium: 300ms ease;
+  --transition-slow: 600ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: var(--gray-900);
+    --text-color: var(--gray-100);
+    --link-color: var(--color-primary-light);
+    --shadow-color: hsla(var(--color-primary-hue), 50%, 60%, 0.2);
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+h1, h2, h3 {
+    color: var(--color-primary);
+    text-shadow: var(--shadow-lg);
+
+    span {
+        color: var(--gray-500);
+    }
+}
+
+p {
+    color: var(--text-color);
+}
+
+a {
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+button {
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--btn-color);
+    background-color: var(--color-primary);
+    border: none;
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+}
+/* Layout Header styles */
+
+.app-header {
+    background-color: var(--gray-200);
+    padding: var(--space-3);
+    display: flex;
+
+    .title {
+        flex-basis: 25%;
+    }
+    .navbar {
+        flex-basis:  75%;
+        display: flex;
+        justify-content: center;
+        gap: var(--space-5);
+        align-items: center;
+        flex-basis: 75%;
+
+        a {
+            position: relative;
+            font-weight: bolder;
+
+
+            &::after {
+                background-color: var(--link-color);
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -3px;
+                height: 3px;
+                width: 0;
+                transition: width var(--transition-medium);
+            }
+
+            &:hover::after {
+                width: 100%;
+            }
+
+            &.active {
+                color: var(--color-primary-dark);
+                pointer-events: none;
+                &::after {
+                    background-color: var(--color-primary);
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+}
+
+/* Authentiction form styles */
+
+.auth-form {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: var(--space-5) var(--space-3);
+    box-shadow: var(--shadow-lg);
+
+    h2 {
+        text-align: center;
+        margin-bottom: var(--space-4);
+    }
+    .input-container {
+        background-color: var(--gray-100);
+        display: flex;
+        align-items: center;
+        padding-left: var(--space-2);
+        margin-bottom: var(--space-3);
+        box-shadow: var(--shadow-sm);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        svg {
+            color: var(--color-primary);
+        }
+        input {
+            font-size: 1.2rem;
+            padding: var(--space-2);
+            border: none;
+            outline: none;
+        }
+
+        &:focus-within, &:hover {
+            outline: 1px solid var(--color-primary);
+            transition: var(--transition-fast);
+        }
+    }
+    button {
+        background-color: var(--gray-500);
+        padding: var(--space-2);
+        border: none;
+        border-radius: var(--radius-xs);
+        box-shadow: var(--shadow-sm);
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        transition: var(--transition-medium);
+        &::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 0;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: var(--color-primary);
+            transition: var(--transition-medium);
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
 }
