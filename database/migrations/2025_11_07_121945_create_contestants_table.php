@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rounds', function (Blueprint $table) {
+        Schema::create('contestants', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->foreignId('competition_id')->constrained('competitions')->onDelete('cascade');
+            $table->foreignId('round_id')->constrained('rounds')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascaded');
             $table->timestamps();
+
+            $table->unique(['user_id', 'competition_id']);    
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rounds');
+        Schema::dropIfExists('contestants');
     }
 };

@@ -31,7 +31,8 @@ Route::middleware('auth')->controller(CompetitionController::class)->group(funct
     
     
     // Action routes
-    Route::post('/competitions/{competition}', 'create')->name('create');
-    Route::delete('/competitions/{competition}', 'delete')->name('delete');
+    Route::post('/competitions/create', 'create')->name('create');
+    Route::put('/competitions/{id}', 'update')->name('edit');
+    Route::delete('/competitions/{id}', 'delete')->name('delete');
 });
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Brick\Math\BigInteger;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,12 @@ class CompetitionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(),
+            'name' => fake()->name(),
             'year' => fake()->year(),
-            'point_for_good_answer' => fake()->numberBetween(3,5), 'point_for_bad_answer' => fake()->numberBetween(-2, -1),'point_for_no_answer' => fake()->numberBetween(0), 'available_languages' => fake()->country(),
+            'available_languages' => fake()->country(),
+            'point_for_good_answer' => fake()->numberBetween(3,5),
+            'point_for_bad_answer' => fake()->numberBetween(-2, -1),
+            'point_for_no_answer' => 0 
         ];
     }
 }

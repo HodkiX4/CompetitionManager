@@ -12,11 +12,11 @@ async function register(e) {
             console.log(resp.data.view);
             window.location.href = resp.data.view;
         }
-    } catch(e) {
-        if(isAxiosError(e)) {
-            console.error(e.response.data);
-        } else if(e instanceof Error) {
-            console.error(e.message); 
+    } catch(error) {
+        if(isAxiosError(error)) {
+            console.error(error.response.data);
+        } else if(error instanceof Error) {
+            console.error(error.message); 
         } else {
             console.error("Unknown error occured.");
         }
@@ -36,10 +36,10 @@ async function login(e) {
             window.location.href = resp.data.view;
         }
     } catch (error) {
-        if(isAxiosError(e)) {
-            console.error(e.response.data);
-        } else if(e instanceof Error) {
-            console.error(e.message); 
+        if(isAxiosError(error)) {
+            console.error(error.response.data);
+        } else if(error instanceof Error) {
+            console.error(error.message); 
         } else {
             console.error("Unknown error occured.");
         }
@@ -57,10 +57,10 @@ async function logout(e) {
             window.location.href = resp.data.view;
         }
     } catch (error) {
-        if(isAxiosError(e)) {
-            console.error(e.response.data);
-        } else if(e instanceof Error) {
-            console.error(e.message); 
+        if(isAxiosError(error)) {
+            console.error(error.response.data);
+        } else if(error instanceof Error) {
+            console.error(error.message); 
         } else {
             console.error("Unknown error occured.");
         }

@@ -11,45 +11,48 @@ class CompetitionController extends Controller
         $competitions = Competition::all();
         return view("competitions.index", ["competitions" => $competitions]);
     }
-
+    
     public function create(Request $request) {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'year' => 'required|number',
-            'available_languages' => 'required|text',
-            'pfc' => 'required|number',
-            'pfw' => 'required|number',
-            'pfn' => 'required|number'
+            'year' => 'required|integer',
+            'available_languages' => 'required|string|max:255',
+            'point_for_good_answer' => 'required|integer',
+            'point_for_bad_answer' => 'required|integer',
+            'point_for_no_answer' => 'required|integer',
         ]);
 
         $competition = Competition::create($validated);
 
         return response()->json([
             'success' => true,
-            'message' => 'Verseny sikeresen étrehozva.'
+            'competition' => $competition,
+            'message' => 'Verseny sikeresen létrehozva.'
         ]);
     }
-
-    public function update(Request $request) {
+    
+    public function update(Request $request, string $id) {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'year' => 'required|number',
-            'available_languages' => 'required|text',
-            'pfc' => 'required|number',
-            'pfw' => 'required|number',
-            'pfn' => 'required|number'
+            'year' => 'required|integer',
+            'available_languages' => 'required|string|max:255',
+            'point_for_good_answer' => 'required|integer',
+            'point_for_bad_answer' => 'required|integer',
+            'point_for_no_answer' => 'required|integer',
         ]);
 
-        $competition = Competition::update($validated);
-
+        $competition = Competition::find($id);
+        $competition->update($validated);
+        
         return response()->json([
             'success' => true,
+            'competition' => $competition,
             'message'=> 'Verseny sikeresen módosítva.'
         ]);
     }
 
-    public function delete(Competition $competition) {
-        $competition->delete();
+    public function delete(string $id) {
+        Competition::find($id)->delete();
 
         return response()->json([
             'success' => true,

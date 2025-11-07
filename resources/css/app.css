@@ -100,6 +100,51 @@ button {
     border: none;
     padding: var(--space-2);
     border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    &:hover {
+        background-color: var(--color-primary-dark);
+    }
+}
+
+
+svg {
+    color: var(--color-primary);
+}
+
+
+.input-container {
+    background-color: var(--gray-100);
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    
+    input, textarea {
+        font-size: 1.2rem;
+        padding: var(--space-2);
+        border: none;
+        outline: none;
+    }
+    
+    textarea {
+        resize: none;
+    }
+    label {
+        width: 100%;
+        background-color: var(--gray-300);
+        padding: var(--space-2);
+        font-style: italic;
+        font-weight: bold;
+        color: var(--color-primary);
+        text-align: center;
+    }
+
+    &:focus-within, &:hover {
+        outline: 1px solid var(--color-primary);
+        transition: var(--transition-fast);
+    }
 }
 /* Layout Header styles */
 
@@ -149,50 +194,23 @@ button {
             }
 
         }
+
+        button:hover {
+            background-color: var(--color-primary-dark);
+            transform: scale(1.1);
+        }
+        button:active {
+            background-color: var(--color-primary-dark);
+            transform: scale(1);
+        }
     }
 }
 
-/* Authentiction form styles */
-
-.auth-form {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--gray-200);
-    border-radius: var(--radius-sm);
-    padding: var(--space-5) var(--space-3);
-    box-shadow: var(--shadow-lg);
-
-    h2 {
-        text-align: center;
-        margin-bottom: var(--space-4);
-    }
-    .input-container {
-        background-color: var(--gray-100);
-        display: flex;
-        align-items: center;
-        padding-left: var(--space-2);
-        margin-bottom: var(--space-3);
-        box-shadow: var(--shadow-sm);
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        svg {
-            color: var(--color-primary);
-        }
-        input {
-            font-size: 1.2rem;
-            padding: var(--space-2);
-            border: none;
-            outline: none;
-        }
-
-        &:focus-within, &:hover {
-            outline: 1px solid var(--color-primary);
-            transition: var(--transition-fast);
-        }
-    }
-    button {
+#layout {
+    color: rebeccapurple;
+}
+.auth-form, .competition-form {
+        button {
         background-color: var(--gray-500);
         padding: var(--space-2);
         border: none;
@@ -218,4 +236,132 @@ button {
             width: 100%;
         }
     }
+}
+/* Authentiction form styles */
+
+.auth-form {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: var(--space-5) var(--space-3);
+    box-shadow: var(--shadow-lg);
+
+    h2 {
+        text-align: center;
+        margin-bottom: var(--space-4);
+    }
+
+    .input-container {
+        padding-left: var(--space-1);
+    }
+
+}
+
+
+/* Competition page styles */
+
+.disabled {
+    display: none !important;
+}
+
+#no-comp-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#create-modal, #edit-modal, #add-round-modal {
+    z-index: 100;
+    background-color: rgb(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #close-create-btn, #close-edit-btn, #close-round-btn {
+        position: absolute;
+        top: var(--space-4);
+        right: var(--space-4);
+        cursor: pointer;
+        svg {
+            color: var(--gray-200);
+            fill: var(--color-primary);
+        }
+    }
+    
+    .competition-form {
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        background-color: var(--gray-200);
+        padding: var(--space-3) var(--space-4);
+
+        h2 {
+            text-align: center;
+            margin-bottom: var(--space-2);
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+#competition-list {
+    padding: var(--space-3) var(--space-4);
+    li {
+        background-color: var(--gray-200);
+        padding: var(--space-3) var(--space-1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-5);
+        margin-bottom: var(--space-2);
+        border-radius: var(--space-3);
+        box-shadow: var(--shadow-md);
+
+        .content {
+            flex-basis: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+
+            span {
+                color: var(--text-color);
+                strong {
+                    color: var(--color-primary);
+                }
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: var(--space-3);
+            button {
+                box-shadow: var(--shadow-md);
+                border-radius: var(--radius-full);
+                display: flex;
+                svg {
+                    color: var(--gray-100)
+                }
+                transition: transform var(--transition-medium);
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    };
 }

@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('competitions', function (Blueprint $table) {
-            $table->id();
+            $table->id()->primary();
             $table->string('name');
-            $table->string('year');
+            $table->integer('year');
             $table->string('available_languages');
-            $table->string('point_for_good_answer');
-            $table->string('point_for_bad_answer');
-            $table->string('point_for_no_answer');
+            $table->integer('point_for_good_answer');
+            $table->integer('point_for_bad_answer');
+            $table->integer('point_for_no_answer');
             $table->timestamps();
+
+            $table->unique(['name','year']);
         });
     }
 

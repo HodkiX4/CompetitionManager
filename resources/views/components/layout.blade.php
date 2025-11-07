@@ -7,6 +7,8 @@
         <script src="https://unpkg.com/lucide@latest"></script>
         @vite('resources/css/app.css')
         @vite('resources/js/auth.js')
+        @vite('resources/js/competitions.js')
+        @vite('resources/js/modals.js')
 </head>
 <body>
     <header class="app-header">
@@ -26,11 +28,12 @@
                     @csrf
                     <button class="nav-link" type="submit">Kijelentkezés</button>
                 </form>
+                <button id="open-create-btn" onclick="addCreateModal()">Létrehozás</button>
             @endauth
         </nav>
     </header>
 
-    <main>
+    <main id="layout">
         {{ $slot }}
     </main>
 </body>

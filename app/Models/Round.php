@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Round extends Model
 {
-    protected $fillable = ['question', 'user_id', 'competition_id'];
+    protected $fillable = [
+        'question',
+        'user_id',
+        'competition_id'
+    ];
     /** @use HasFactory<\Database\Factories\RoundFactory> */
     use HasFactory;
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
